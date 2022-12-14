@@ -1,4 +1,4 @@
-# details_pro
+# Student Details
 
 A new Flutter project.
 
