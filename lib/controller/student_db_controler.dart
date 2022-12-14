@@ -75,7 +75,7 @@ class StudentDb with ChangeNotifier {
   /// Edit Student
   /// Overwrites the existing student details based on key with brand  new updated student object
   Future<void> editStudent(
-      {required StudentModel studentModel, required  id}) async {
+      {required StudentModel studentModel, required var id}) async {
     final _categoryDB = await Hive.openBox<StudentModel>(STUDENT_DB);
     _categoryDB.putAt(id, studentModel);
 

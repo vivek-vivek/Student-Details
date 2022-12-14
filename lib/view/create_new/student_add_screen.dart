@@ -14,24 +14,6 @@ class ScreenCreate extends StatelessWidget {
   TextEditingController newStudentName = TextEditingController();
   TextEditingController newStudentAge = TextEditingController();
 
-  void _addStudent(BuildContext context) {
-    ///validating the input
-    if (newStudentName.text.isEmpty) {
-      commonSnackBar("You must Include a name.", context);
-    }
-    if (newStudentAge.text.length <= 5) {
-      commonSnackBar("The minimum age is SIX.", context);
-    }
-
-    /// Save contact data, email and phone are optional - null values replaced by empty string
-    Provider.of<StudentDb>(context, listen: false).addStudent(StudentModel(
-      id: DateTime.now().microsecondsSinceEpoch.toString(),
-      name: newStudentName.text,
-      age: newStudentAge.text,
-    ));
-    Navigator.pop(context);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,7 +43,13 @@ class ScreenCreate extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20)),
                 child: TextButton(
                   onPressed: () {
-                    _addStudent(context);
+                    Provider.of<StudentDb>(context, listen: false)
+                        .addStudent(StudentModel(
+                      id: DateTime.now().microsecondsSinceEpoch.toString(),
+                      name: newStudentName.text,
+                      age: newStudentAge.text,
+                    ));
+                    Navigator.pop(context);
                   },
                   child: const Text(
                     'Submit',
